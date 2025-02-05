@@ -6,7 +6,7 @@ let siteKey = '';
 let siteType = 0;
 let searchable=0;
 const PC_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.361";
-let cookie = "https://mirror.ghproxy.com/https://raw.githubusercontent.com/HiTang123/xyz/master/main/cookie.txt";
+let cookie = "https://mirror.ghproxy.com/https://github.com/BtPanel/xq/blob/master/main/cookie.txt";
 async function request(reqUrl) {
   const res = await req(reqUrl, {
       headers: getMb(),
@@ -266,7 +266,8 @@ async function homeVod() {
   let data = JSON.parse(await request(html)).data.result;
   let videos = [];
   data.forEach(function(it) {
-      if(it.bvid!==""){       videos.push({
+      if(it.bvid!==""){
+       videos.push({
           vod_id: it.aid,
           vod_name: stripHtmlTag(it.title),
           vod_pic: 'http:'+it.pic,
@@ -282,7 +283,8 @@ async function category(tid, pg, filter, extend) {
   let data = JSON.parse(await request(html)).data;
   let videos = [];
   data.result.forEach(function(it) {
-      if(it.bvid!==""){       videos.push({
+      if(it.bvid!==""){
+       videos.push({
           vod_id: it.aid,
           vod_name: stripHtmlTag(it.title),
           vod_pic: 'https:' + it.pic,
@@ -331,7 +333,8 @@ async function play(flag, id, flags) {
   let html = HOST + '/x/player/playurl?avid=' + ids[0] + '&cid=' + ids[1] + '&qn=116';
   let data = JSON.parse(await request(html)).data.durl;
   let maxSize = -1;
-  let position = -1;  const dan = 'https://api.bilibili.com/x/v1/dm/list.so?oid=' + ids[1];
+  let position = -1;
+  const dan = 'https://api.bilibili.com/x/v1/dm/list.so?oid=' + ids[1];
   data.forEach(function(it, i) {
       if (maxSize < Number(it.size)) {
           maxSize = Number(it.size);
@@ -348,7 +351,8 @@ async function play(flag, id, flags) {
   // console.debug('我的哔哩 purl =====>' + purl); // js_debug.log
   return JSON.stringify({
     parse: 0,
-    url: purl,    danmaku: dan,    
+    url: purl,
+    danmaku: dan,    
     header: getMb(),
   });
 }
@@ -360,7 +364,8 @@ async function search(wd, quick, pg) {
   let data = JSON.parse(await request(html)).data;
   let videos = [];
   data.result.forEach(function(it) {
-    if(it.bvid!==""){       videos.push({
+    if(it.bvid!==""){
+       videos.push({
         vod_id: it.aid,
         vod_name: stripHtmlTag(it.title),
         vod_pic: 'https:' + it.pic,
